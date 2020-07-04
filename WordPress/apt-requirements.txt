@@ -1,0 +1,13 @@
+nginx
+php-fpm
+# php-cli
+php-mysql
+# php-gd
+# php-imagick
+# php-recode
+# php-tidy
+# php-xmlrpc
+
+mariadb-server
+unzip
+# phpmyadmin

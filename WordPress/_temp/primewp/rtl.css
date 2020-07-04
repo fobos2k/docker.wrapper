@@ -1,0 +1,255 @@
+/*
+ * Theme Name: PrimeWP RTL CSS
+ * Description: Adds support for languages written in a Right To Left (RTL) direction.
+ */
+
+body{direction:rtl;unicode-bidi:embed;}
+
+/* Typography & Elements
+-------------------------------------------------------------- */
+blockquote{text-align:right;}
+blockquote cite{text-align:right;}
+dd{margin:0 1.5em 1.5em;}
+th,td,caption{padding:4px 5px 4px 10px;}
+
+/* Layout
+-------------------------------------------------------------- */
+.primewp-content-wrapper{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-webkit-flex-direction:row-reverse;-moz-box-orient:horizontal;-moz-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse;}
+
+/* Header
+-------------------------------------------------------------- */
+.primewp-header-menu-active .primewp-logo{float:right;text-align:right;}
+.primewp-header-menu-active .primewp-header-right{float:left;}
+@media only screen and (max-width: 1112px) {
+.primewp-header-menu-active .primewp-logo{float:none;text-align:center;}
+.primewp-header-menu-active .primewp-header-right{float:none;}
+}
+
+/* Top Menu
+-------------------------------------------------------------- */
+.primewp-secondary-nav-menu li{text-align:right;float:right;}
+.primewp-secondary-nav-menu .sub-menu,.primewp-secondary-nav-menu .children{left:0;right:-9999px;}
+.primewp-secondary-nav-menu .sub-menu .sub-menu,.primewp-secondary-nav-menu .children .children{margin:-39px 189px 0 0}
+.primewp-secondary-nav-menu li:hover > .sub-menu,.primewp-secondary-nav-menu li:hover > .children,.primewp-secondary-nav-menu li.primewp-focus > .sub-menu,.primewp-secondary-nav-menu li.primewp-focus > .children{right:auto;}
+.primewp-secondary-responsive-menu-icon{text-align:right;}
+.primewp-secondary-responsive-menu-icon::before{margin:0 0 0 6px;}
+@media only screen and (min-width: 1113px) {
+.primewp-secondary-nav-menu > li.menu-item-has-children > a:after{margin-left:0;margin-right:8px;}
+.primewp-secondary-nav-menu .sub-menu li.menu-item-has-children > a:after,.primewp-secondary-nav-menu .children li.menu-item-has-children > a:after{margin-left:0;margin-right:8px;right:auto;left:8px;}
+}
+@media only screen and (max-width: 1112px) {
+.primewp-secondary-nav-menu li{float:none}
+.primewp-secondary-nav-menu.primewp-secondary-responsive-menu .menu-item-has-children > a,.primewp-secondary-nav-menu.primewp-secondary-responsive-menu .page_item_has_children > a{margin-right:0;margin-left:50px;}
+.primewp-secondary-nav-menu.primewp-secondary-responsive-menu > .menu-item-has-children:before,.primewp-secondary-nav-menu.primewp-secondary-responsive-menu > .page_item_has_children:before{float:left;right:auto;left:0;text-align:left;}
+
+.primewp-secondary-nav-menu.primewp-secondary-responsive-menu > li > .sub-menu,.primewp-secondary-nav-menu.primewp-secondary-responsive-menu > li > .children{margin:0;padding:0;left:0;right:-9999px;}
+.primewp-secondary-nav-menu.primewp-secondary-responsive-menu > li.primewp-focus > .sub-menu,.primewp-secondary-nav-menu.primewp-secondary-responsive-menu > li.primewp-focus > .children{right:auto;}
+.primewp-secondary-nav-menu.primewp-secondary-responsive-menu > li > .sub-menu.primewp-submenu-toggle,.primewp-secondary-nav-menu.primewp-secondary-responsive-menu > li > .children.primewp-submenu-toggle{right:auto;}
+
+.primewp-secondary-nav-menu.primewp-secondary-responsive-menu .sub-menu,.primewp-secondary-nav-menu.primewp-secondary-responsive-menu .children{right:auto;margin:0;}
+.primewp-secondary-nav-menu.primewp-secondary-responsive-menu .sub-menu .sub-menu,.primewp-secondary-nav-menu.primewp-secondary-responsive-menu .children .children{margin:0;padding-left:0;padding-right:15px;}
+}
+
+/* Menu
+-------------------------------------------------------------- */
+.primewp-nav-primary{float:left;}
+.primewp-header-full-active .primewp-nav-primary{float:none;}
+.primewp-primary-nav-menu li{text-align:right;float:right;}
+.primewp-primary-nav-menu .sub-menu,.primewp-primary-nav-menu .children{left:0;right:-9999px;}
+.primewp-primary-nav-menu .sub-menu .sub-menu,.primewp-primary-nav-menu .children .children{margin:-47px 189px 0 0}
+.primewp-primary-nav-menu li:hover > .sub-menu,.primewp-primary-nav-menu li:hover > .children,.primewp-primary-nav-menu li.primewp-focus > .sub-menu,.primewp-primary-nav-menu li.primewp-focus > .children{right:auto;}
+.primewp-primary-responsive-menu-icon{text-align:right;}
+.primewp-primary-responsive-menu-icon::before{margin:0 0 0 6px;}
+@media only screen and (min-width: 1113px) {
+.primewp-primary-nav-menu > li > a{background:none !important;}
+.primewp-primary-nav-menu > li.menu-item-has-children > a:after{margin-left:0;margin-right:8px;}
+.primewp-primary-nav-menu .sub-menu li.menu-item-has-children > a:after,.primewp-primary-nav-menu .children li.menu-item-has-children > a:after{margin-left:0;margin-right:8px;right:auto;left:8px;}
+}
+@media only screen and (max-width: 1112px) {
+.primewp-nav-primary{float:none;}
+.primewp-primary-nav-menu li{float:none}
+.primewp-primary-nav-menu.primewp-primary-responsive-menu .menu-item-has-children > a,.primewp-primary-nav-menu.primewp-primary-responsive-menu .page_item_has_children > a{margin-right:0;margin-left:50px;}
+.primewp-primary-nav-menu.primewp-primary-responsive-menu > .menu-item-has-children:before,.primewp-primary-nav-menu.primewp-primary-responsive-menu > .page_item_has_children:before{float:left;right:auto;left:0;text-align:left;}
+
+.primewp-primary-nav-menu.primewp-primary-responsive-menu > li > .sub-menu,.primewp-primary-nav-menu.primewp-primary-responsive-menu > li > .children{margin:0;padding:0;left:0;right:-9999px;}
+.primewp-primary-nav-menu.primewp-primary-responsive-menu > li.primewp-focus > .sub-menu,.primewp-primary-nav-menu.primewp-primary-responsive-menu > li.primewp-focus > .children{right:auto;}
+.primewp-primary-nav-menu.primewp-primary-responsive-menu > li > .sub-menu.primewp-submenu-toggle,.primewp-primary-nav-menu.primewp-primary-responsive-menu > li > .children.primewp-submenu-toggle{right:auto;}
+
+.primewp-primary-nav-menu.primewp-primary-responsive-menu .sub-menu,.primewp-primary-nav-menu.primewp-primary-responsive-menu .children{right:auto;margin:0;}
+.primewp-primary-nav-menu.primewp-primary-responsive-menu .sub-menu .sub-menu,.primewp-primary-nav-menu.primewp-primary-responsive-menu .children .children{margin:0;padding-left:0;padding-right:15px;}
+}
+.primewp-primary-nav-menu a.primewp-header-icon-search{margin-left:0;margin-right:5px;}
+.primewp-primary-nav-menu a.primewp-header-icon-social{margin-left:0;margin-right:5px;}
+.primewp-header-icon-search-mobile{left:auto;right:45px;}
+.primewp-header-icon-social-mobile{left:auto;right:0;}
+
+/* Posts & Pages
+-------------------------------------------------------------- */
+.primewp-posts .primewp-posts-heading{text-align:right;}
+.primewp-posts .primewp-posts-heading span{padding:0 0 0 10px;}
+.primewp-posts .primewp-posts-heading i{right:0;left:5px;}
+
+.primewp-page-header{text-align:right;}
+.primewp-page-header-inside{padding:0 0 0 10px;}
+.taxonomy-description{text-align:right;}
+
+.primewp-entry-meta-single{text-align:right;}
+.primewp-entry-meta-single-cats{margin:0 0 0 10px;}
+.primewp-entry-meta-single-author{margin:0 0 0 10px;}
+.primewp-entry-meta-single-date{margin:0 0 0 10px;}
+.primewp-entry-meta-single-comments{margin:0 0 0 10px;}
+
+.entry-title{text-align:right;}
+.entry-content table tr th:last-child{border-left:none;}
+.entry-content table tr td{border-left:1px solid #eee;}
+.entry-content table tr td:last-child{border-left:none;}
+
+/* =Page Links
+----------------------------------------------- */
+.page-links > span,.page-links > a{float:right;border-right:1px solid #dadada !important;}
+.page-links span.page-links-title{border-right:0 !important;}
+
+/* Posts/Post Navigation
+-------------------------------------------------------------- */
+.nav-previous{float:right;text-align:right;}
+.nav-next{float:left;text-align:left;}
+
+.navigation.pagination{text-align:right;}
+
+.primewp-post-navigation-content{flex-direction:row-reverse;}
+.primewp-post-navigation-previous{float:right;}
+.primewp-post-navigation-next{float:left;}
+.primewp-post-navigation-previous{flex-direction:row-reverse;float:right;}
+.primewp-post-navigation-previous-top{float:right;}
+.primewp-post-navigation-previous-bot{float:right;}
+.primewp-post-navigation-next{flex-direction:row-reverse;float:left;}
+.primewp-post-navigation-next-top{float:right;}
+.primewp-post-navigation-next-bot{float:right;}
+@media only screen and (max-width: 1023px) {
+.primewp-post-navigation-previous{float:none;}
+.primewp-post-navigation-next{float:none;}
+.primewp-post-navigation-next{flex-direction:row-reverse;}
+}
+
+/* WP-PageNavi
+-------------------------------------------------------------- */
+.wp-pagenavi{text-align:right;}
+
+/* Tag Cloud Widget
+-------------------------------------------------------------- */
+.widget_tag_cloud a{margin:0 0 5px 5px;}
+
+/* Calendar
+-------------------------------------------------------------- */
+#wp-calendar caption{text-align:left;padding:10px 0 0 10px;}
+#wp-calendar tbody td{text-align:right;}
+#wp-calendar tfoot #next{text-align:left;}
+#wp-calendar thead th{padding-bottom:10px;text-align:right;}
+
+/* Alignments
+-------------------------------------------------------------- */
+.alignleft{float:right;margin:0 0 10px 10px;}
+.alignright{float:left;margin:0 10px 10px 0;}
+
+/* Captions
+-------------------------------------------------------------- */
+.wp-caption{text-align:right;}
+
+/* Comments
+-------------------------------------------------------------- */
+.comment-respond #cancel-comment-reply-link{margin-left:0;margin-right:1em;}
+.comment-form label{padding-right:0;padding-left:1em;}
+.comments-area > ol{margin:0;}
+.comment .edit-link,.pingback .edit-link{float:left;}
+.comment .comment-meta .comment-author .avatar{float:right;margin-right:0;margin-left:1em;}
+#respond input[type=text],textarea{padding:3px 3px 3px 0;margin:5px 0 3px 1px;}
+#respond input[type=text]:focus,textarea:focus{margin:5px 0 3px 1px;}
+
+/* Sidebar
+-------------------------------------------------------------- */
+.primewp-sidebar-widget-areas .widget .primewp-widget-title{text-align:right;}
+.primewp-sidebar-widget-areas .widget .primewp-widget-title span{padding:0 0 0 10px;}
+.primewp-sidebar-widget-areas .widget .primewp-widget-title i{left:5px;}
+.primewp-sidebar-widget-areas .widget ol{padding:0 1.2em 0 0;}
+.primewp-sidebar-widget-areas .widget li{padding:6px 0px 6px 0px;}
+.primewp-sidebar-widget-areas .widget li li{padding:6px 10px 6px 0;}
+
+/* Footer
+-------------------------------------------------------------- */
+#primewp-footer-blocks .widget ol{padding:0 1.2em 0 0;}
+#primewp-footer-blocks .widget li{padding:6px 0 6px 0;}
+#primewp-footer-blocks .widget li li{padding:8px 10px 8px 0;}
+
+.primewp-footer-block-cols{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-webkit-flex-direction:row-reverse;-moz-box-orient:horizontal;-moz-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse;}
+
+/* Copyright
+-------------------------------------------------------------- */
+#primewp-footer .primewp-foot-wrap p.primewp-copyright{text-align:right;}
+#primewp-footer .primewp-foot-wrap p.primewp-credit{text-align:right;}
+
+/* Search Widget
+-------------------------------------------------------------- */
+input.primewp-search-submit{right:auto;left:0;}
+
+/* Featured Posts Area Widgets
+-------------------------------------------------------------- */
+.primewp-featured-posts-area .widget .primewp-widget-title{text-align:right;}
+.primewp-featured-posts-area .widget .primewp-widget-title span{padding:0 0 0 10px;}
+.primewp-featured-posts-area .widget .primewp-widget-title i{right:auto;left:5px;}
+.primewp-featured-posts-area .widget ol{padding:0 1.2em 0 0;}
+.primewp-featured-posts-area .widget li{padding:6px 0px 6px 0px;}
+.primewp-featured-posts-area .widget li li{padding:6px 10px 6px 0;}
+
+/* Featured Posts: Style 3
+-------------------------------------------------------------- */
+.primewp-fp03-post-categories{text-align:right;}
+.primewp-fp03-post-categories a{margin:0 0 2px 3px;}
+.primewp-fp03-post-categories a:before{margin-right:0;margin-left:2px;}
+.primewp-fp03-post-categories a:last-child{margin:0 0 0 0;}
+.primewp-fp03-post .primewp-fp03-post-title{text-align:right;}
+.primewp-fp03-post-snippet{text-align:right;}
+.primewp-fp03-post-footer{text-align:right;}
+.primewp-fp03-post-read-more{text-align:right;}
+.primewp-fp03-post-read-more a:after{margin-left:0;margin-right:5px;}
+
+/* Featured Posts: Style 4
+-------------------------------------------------------------- */
+.primewp-fp04-post{float:none;}
+.primewp-fp04-post-thumbnail{margin-right:0;margin-left:2%;float:right;}
+.primewp-fp04-post.primewp-fp04-post-style-2 .primewp-fp04-post-thumbnail{margin-right:2%;margin-left:0;float:left;}
+.primewp-fp04-post.primewp-fp04-post-style-3:nth-child(2n) .primewp-fp04-post-thumbnail{margin-right:2%;margin-left:0;float:left;}
+.primewp-fp04-post-details{float:right;}
+.primewp-fp04-post-categories a{margin:0 0 2px 3px;}
+.primewp-fp04-post-categories a:before{margin-right:0;margin-left:2px;}
+.primewp-fp04-post-categories a:last-child{margin:0 0 0 0;}
+.primewp-fp04-post-read-more a:after{margin-left:0;margin-right:5px;}
+@media only screen and (max-width: 556px) {
+.primewp-fp04-post-thumbnail{margin:0 0 10px 0 !important;float:none !important;}
+.primewp-fp04-post-details{float:none;}
+.primewp-fp04-post-categories{text-align:right;}
+.primewp-fp04-post .primewp-fp04-post-title{text-align:right;}
+.primewp-fp04-post-snippet{text-align:right;}
+.primewp-fp04-post-footer{text-align:right;}
+.primewp-fp04-post-read-more{text-align:right;}
+}
+
+/* Featured Posts: Style 9
+-------------------------------------------------------------- */
+.primewp-fp09-post-categories{text-align:right;}
+.primewp-fp09-post-categories a{margin:0 0 2px 3px;}
+.primewp-fp09-post-categories a:before{margin-right:0;margin-left:2px;}
+.primewp-fp09-post-categories a:last-child{margin:0 0 0 0;}
+.primewp-fp09-post .primewp-fp09-post-title{text-align:right;}
+.primewp-fp09-post-footer{text-align:right;}
+
+/* Author Bio Box
+-------------------------------------------------------------- */
+.primewp-author-bio-gravatar{float:right;padding:0 0 5px 12px;}
+.primewp-author-bio-text{float:right;}
+.primewp-author-bio-social{text-align:right;}
+.primewp-author-bio-social a{margin:0 0 3px 4px;}
+.primewp-author-bio-social a i{margin-right:0;margin-left:1px;}
+
+/* Scroll to Top Button
+-------------------------------------------------------------- */
+.primewp-scroll-top{right:auto;left:20px;}
