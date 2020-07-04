@@ -1,8 +1,9 @@
-cargo
 clang
 curl
 git-core
-libfontconfig1-dev
+libxcb-render0-dev
+libxcb-shape0-dev
+libxcb-xfixes0-dev
 libxft-dev
 libxinerama-dev
 llvm
