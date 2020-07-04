@@ -25,8 +25,11 @@ ADD ${APP_ROOTFS} /
 # Userspace
 USER ${APP_USER}
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; \
-    mkdir -p ${APP_WORKSPACE}; \
-    echo ". ${HOME}/flir_start.sh > /dev/null 2>&1" >> /home/${APP_USER}/.zshrc
+    curl --proto '=https' --tlsv1.2 -sSf -o /tmp/rustup.sh https://sh.rustup.rs; \
+    sh /tmp/rustup.sh -y; \
+    echo ". ${HOME}/.cargo/env > /dev/null 2>&1" >> /home/${APP_USER}/.zshrc
+
 
 # Entrypoint
-CMD cd ${APP_WORKSPACE} && /usr/bin/zsh
+CMD cd ${APP_WORKSPACE}; \
+    /usr/bin/zsh
