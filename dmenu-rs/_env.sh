@@ -2,7 +2,7 @@
 
 # Image parameters
 export IMAGE_NAME=dmenu
-export IMAGE_VERSION=0.0.1
+export IMAGE_VERSION=0.1.0
 
 # Container parameters
 export CONTAINER_SUFFIX=container
