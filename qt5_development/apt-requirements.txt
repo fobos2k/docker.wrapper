@@ -1,0 +1,11 @@
+locales
+zsh
+curl
+git
+git-flow
+cmake
+clang
+qt5-default
+qttools5-dev
+libkf5networkmanagerqt-dev
+
