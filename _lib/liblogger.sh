@@ -9,7 +9,7 @@ get_log_prefix()
 {
     LOG_LEVEL=$(echo $1 | awk '{print toupper($0)}')
     case ${LOG_LEVEL} in
-        D | I | W | E )
+        D | I | W | E | F)
             LOG_PREFIX="$(get_timestamp) "
             LOG_PREFIX+=$(echo ${LOG_LEVEL} | awk '{print toupper($0)}')
             ;;
@@ -24,24 +24,21 @@ logger()
 {
     LOG_LEVEL=$1
     
-    # echo -n -e "${LOG_LEVEL}" | awk '{print toupper($0)}'
-
     COUNTER=1
     for ARG in $@; do
         case ${COUNTER} in
             1)
                 LOG_PREFIX=$(get_log_prefix ${ARG})
                 [ -z "${LOG_PREFIX}" ] && break
-                echo -n -e ${LOG_PREFIX}
+                echo -en ${LOG_PREFIX}
                 ;;
             *)
-                echo -e -n " ${ARG}"
+                echo -en " ${ARG}"
                 ;;
         esac
-        COUNTER+=1
+        let COUNTER++
     done
-
-    echo -e "\n"
+    echo -en "\n"
 }
 
 logger_info()
@@ -59,7 +56,15 @@ logger_error()
     logger "E" $@
 }
 
+logger_fail()
+{
+    logger "F" $@
+    exit 1
+}
+
 logger_debug()
 {
-    logger "D" $@
+    if [ ${VERBOSE} ]; then
+        logger "D" $@
+    fi
 }
