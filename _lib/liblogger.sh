@@ -59,12 +59,24 @@ logger_error()
 logger_fail()
 {
     logger "F" $@
+    logger_debug "=== Ended ${FUNCNAME[1]}(${BASH_LINENO[0]})..."
     exit 1
 }
 
 logger_debug()
 {
-    if [ ${VERBOSE} ]; then
-        logger "D" $@
-    fi
+    [ ! ${VERBOSE} ] && return
+    logger "D" $@
+}
+
+logger_start_function()
+{
+    [ ! ${VERBOSE} ] && return
+    logger_debug "=== Started ${FUNCNAME[1]}($@)..."
+}
+
+logger_end_function()
+{
+    [ ! ${VERBOSE} ] && return
+    logger_debug "=== Ended ${FUNCNAME[1]}(${BASH_LINENO[0]})..."
 }

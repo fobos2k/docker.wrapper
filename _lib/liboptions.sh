@@ -1,28 +1,30 @@
 #!/bin/bash
 
 IFS='|'
-read -ra OPTION_PATH_TO_PROJECTS <<< "-p|--projects"
+read -ra OPTION_PROJECT <<< "-p|--project"
 read -ra OPTION_USERNAME <<< "-u|--user"
 read -ra OPTION_VERBOSE <<< "-v|--verbose"
 read -ra OPTION_HELP <<< "-h|--help"
 IFS=' '
 
+
+help_usage()
+{
+    logger_info "Create/run the docker containers for development sandboxes"
+    logger_info "-----------------------------------------------------------------------------"
+    logger_info "$0 [<options>] [<project>]"
+    logger_info "OPTIONS:"
+    logger_info "\t${OPTION_PROJECT[0]} | ${OPTION_PROJECT[1]}=<path_to_project> \t -- path to the folder with project"
+    logger_info "\t${OPTION_USERNAME[0]} | ${OPTION_USERNAME[1]}=<username> \t\t\t -- username for session"
+    logger_info "\t${OPTION_VERBOSE[0]} | ${OPTION_VERBOSE[1]} \t\t\t\t -- make the operation more talkative"
+    logger_info "\t${OPTION_HELP[0]} | ${OPTION_HELP[1]} \t\t\t\t -- this help"
+}
+
+
 get_verbose()
 {
     [[ "$@" == *"${OPTION_VERBOSE[0]}"* ]] && VERBOSE=1
     [[ "$@" == *"${OPTION_VERBOSE[1]}"* ]] && VERBOSE=1
-}
-
-get_option_value()
-{
-    PARAM=$(echo $1 | awk -F= '{ print $1 }')
-    if [ $(is_long_option ${PARAM}) ]; then
-        VALUE=$(echo $1 | awk -F= '{ print $2 }')
-    elif [ $(is_short_option ${PARAM}) ]; then
-        VALUE=$2
-    else
-        VALUE=
-    fi
 }
 
 is_simple_option()
@@ -33,18 +35,20 @@ is_simple_option()
 
 is_long_option()
 {
-    [ $1 = ${OPTION_PATH_TO_PROJECTS[1]} ] && echo 1
+    [ $1 = ${OPTION_PROJECT[1]} ] && echo 1
     [ $1 = ${OPTION_USERNAME[1]} ] && echo 1
 }
 
 is_short_option()
 {
-    [ $1 = ${OPTION_PATH_TO_PROJECTS[0]} ] && echo 1
+    [ $1 = ${OPTION_PROJECT[0]} ] && echo 1
     [ $1 = ${OPTION_USERNAME[0]} ] && echo 1
 }
 
 get_environment()
 {
+    logger_start_function $@
+
     for ARG in $@; do
         PARAM=$(echo $1 | awk -F= '{ print $1 }')
         [ -z ${PARAM} ] && break
@@ -54,7 +58,7 @@ get_environment()
         if [ $(is_long_option ${PARAM}) ]; then
             logger_debug "\tNext long option"
             VALUE=$(echo $1 | awk -F= '{ print $2 }')
-        elif [ $(is_short_option ${PARAM}) ]; then
+        elif [[ $(is_short_option ${PARAM}) && "$2" != "-"* ]]; then
             logger_debug "\tNext short option"
             VALUE=$2
             shift
@@ -65,8 +69,8 @@ get_environment()
         logger_debug "Parsed: ${PARAM} = ${VALUE}"
 
         case ${PARAM} in
-            ${OPTION_PATH_TO_PROJECTS[0]} | ${OPTION_PATH_TO_PROJECTS[1]})
-                PATH_TO_PROJECTS=${VALUE}
+            ${OPTION_PROJECT[0]} | ${OPTION_PROJECT[1]})
+                PATH_TO_PROJECT=${VALUE}
                 ;;
             ${OPTION_USERNAME[0]} | ${OPTION_USERNAME[1]} )
                 CONTAINER_USER=${VALUE}
@@ -76,12 +80,16 @@ get_environment()
                 ;;
             ${OPTION_HELP[0]} | ${OPTION_HELP[1]})
                 help_usage
+
+                logger_end_function
                 exit 0
                 ;;
             *)
                 if [ ${PARAM:0:1} = "-" ]; then
                     logger_error "Unknown option: ${PARAM}"
                     help_usage
+
+                    logger_end_function
                     exit 0
                 else
                     PROJECT=${PARAM}
@@ -91,4 +99,6 @@ get_environment()
         esac
         shift
     done
+
+    logger_end_function
 }
