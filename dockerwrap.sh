@@ -20,7 +20,7 @@ help_usage()
 
 print_environment()
 {
-    logger_debug "Run command: ${COMMAND}"
+    logger_debug "Execute project: ${PROJECT}"
     logger_debug "Environment:"
     logger_debug "\tPATH_TO_PROJECTS = ${PATH_TO_PROJECTS}"
     logger_debug "\tCONTAINER_USER = ${CONTAINER_USER}"
@@ -58,10 +58,8 @@ main()
     using_library libdockerwrap
 
     get_verbose $@
-
-    logger_debug "Verbose = ${OPTION_VERBOSE[@]}"
-
-    logger_info "Starting (verbose = ${VERBOSE})..."
+    [ ${VERBOSE} ] && WITH_VERBOSE=" (with VERBOSE option)"
+    logger_info "Starting${WITH_VERBOSE}..."
 
     get_environment $@
 

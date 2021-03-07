@@ -9,16 +9,8 @@ IFS=' '
 
 get_verbose()
 {
-    for ARG in $@; do
-        PARAM=$(echo $1 | awk -F= '{ print $1 }')
-        [ -z ${PARAM} ] && break
-        case ${PARAM} in
-            -v | --verbose)
-                VERBOSE=1
-                break
-                ;;
-        esac
-    done
+    [[ "$@" == *"${OPTION_VERBOSE[0]}"* ]] && VERBOSE=1
+    [[ "$@" == *"${OPTION_VERBOSE[1]}"* ]] && VERBOSE=1
 }
 
 get_option_value()
@@ -41,14 +33,14 @@ is_simple_option()
 
 is_long_option()
 {
-    [[ $1 = ${PATH_TO_PROJECTS[1]} ]] && echo 1
-    [[ $1 = ${OPTION_USERNAME[1]} ]] && echo 1
+    [ $1 = ${OPTION_PATH_TO_PROJECTS[1]} ] && echo 1
+    [ $1 = ${OPTION_USERNAME[1]} ] && echo 1
 }
 
 is_short_option()
 {
-    [[ $1 = ${PATH_TO_PROJECTS[0]} ]] && echo 1
-    [[ $1 = ${OPTION_USERNAME[0]} ]] && echo 1
+    [ $1 = ${OPTION_PATH_TO_PROJECTS[0]} ] && echo 1
+    [ $1 = ${OPTION_USERNAME[0]} ] && echo 1
 }
 
 get_environment()
@@ -57,8 +49,20 @@ get_environment()
         PARAM=$(echo $1 | awk -F= '{ print $1 }')
         [ -z ${PARAM} ] && break
 
-        VALUE=$(get_option_value $@)       
-        [ $(is_short_option ${PARAM}) ] && shift
+        logger_debug "List: $@"
+
+        if [ $(is_long_option ${PARAM}) ]; then
+            logger_debug "\tNext long option"
+            VALUE=$(echo $1 | awk -F= '{ print $2 }')
+        elif [ $(is_short_option ${PARAM}) ]; then
+            logger_debug "\tNext short option"
+            VALUE=$2
+            shift
+        else
+            VALUE=
+        fi
+
+        logger_debug "Parsed: ${PARAM} = ${VALUE}"
 
         case ${PARAM} in
             ${OPTION_PATH_TO_PROJECTS[0]} | ${OPTION_PATH_TO_PROJECTS[1]})
@@ -76,6 +80,7 @@ get_environment()
                 ;;
             *)
                 if [ ${PARAM:0:1} = "-" ]; then
+                    logger_error "Unknown option: ${PARAM}"
                     help_usage
                     exit 0
                 else
