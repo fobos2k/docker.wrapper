@@ -1,10 +1,6 @@
 #!/bin/bash
 
-export PATH_TO_LIBRARIES=_lib
-export PATH_TO_PROJECT=_projects
-export CONTAINER_USER=$(id -un)
-export PROJECT=
-export VERBOSE=
+. ./_env.sh
 
 print_environment()
 {
@@ -38,6 +34,7 @@ check_environment()
     # Project
     [ -z ${PROJECT} ] && logger_fail "Empty project name..."
     [ ! -d ${PATH_TO_PROJECT}/${PROJECT} ] && logger_fail "Project folder not exists (${PATH_TO_PROJECT}/${PROJECT})..."
+    [ ! -e ${PATH_TO_PROJECT}/${PROJECT}/${PROJECT_ENV} ] && logger_fail "Project environment not found (${PATH_TO_PROJECT}/${PROJECT}/${PROJECT_ENV})..."
 
     print_environment
 
@@ -50,6 +47,16 @@ run_project()
     [ ! $? -eq 0 ] && exit 1
 
     start_docker
+
+    logger_info "Aplly the project environment (${PROJECT}/${PROJECT_ENV})..."
+    . ${PATH_TO_PROJECT}/${PROJECT}/${PROJECT_ENV}
+
+    cd ${PATH_TO_PROJECT}/${PROJECT}
+    [ ! $(is_image_present) ] && create_image
+
+    run_container
+
+    cd ${BASE_PATH}
 }
 
 main()
